@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GestionBanque.Models\GestionBanque.Models.csproj" />
-  </ItemGroup>
-
 </Project>
