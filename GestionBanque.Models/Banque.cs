@@ -38,10 +38,13 @@ namespace GestionBanque.Models
 
 				Courant? compte = Courants.SingleOrDefault(c => c.Numero == numeroCompte);
 
+				// Traiter le cas "null"
+
 				if (compte is null)
 				{
 					throw new KeyNotFoundException("Le numéro n'est enregistré pas");
 				}
+
 				return compte;
 			}
 		}
@@ -84,12 +87,36 @@ namespace GestionBanque.Models
             }
 
 			Courants.Remove(compte);
-			
         }
-		#endregion
+        #endregion
 
-		#endregion
+        #region Recherche d'info
+
+		/// <summary>
+		/// Calculer la somme de tous les soldes de comptes possédés par le même titulaire
+		/// </summary>
+		/// <param name="titulaire"></param>
+		/// <returns> double : la somme de tous les soldes </returns>
+        public double AvoirDesComptes(Personne titulaire)
+        {
+			// Créer une liste temp et stocker tous les comptes trouvés avec le même titulaire
+            List<Courant> ComptesDeMemePersonne = new List<Courant>();
+            ComptesDeMemePersonne = Courants.Where(c => c.Titulaire == titulaire).ToList();
+
+			// Calculer la somme des soldes
+			double sommeAvoirs = 0;
+			foreach (var compte in ComptesDeMemePersonne)
+			{
+				sommeAvoirs += compte;
+			}
+
+			return sommeAvoirs;
+
+		}
+        #endregion
+
+        #endregion
 
 
-	}
+    }
 }

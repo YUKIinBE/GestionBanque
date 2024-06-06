@@ -93,6 +93,23 @@
         }
         #endregion
 
+        #region Surcharge d'opérateur
+        /// <summary>
+        /// Additionner montant et solde d'un compte
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="compte"></param>
+        /// <returns> La somme </returns>
+        public static double operator +(double amount, Courant compte)
+        {
+            if (compte.Solde < 0) compte.Solde = 0;
+
+            double somme = amount + compte.Solde;
+            return somme;
+        }
+
+        #endregion
+
         #endregion
     }
 }

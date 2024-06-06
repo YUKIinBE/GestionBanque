@@ -46,6 +46,32 @@ namespace GestionBanque.Models
                 }
             }
         }
+
+        #region Surcharge d'opérateur
+        /// <summary>
+        /// Vérifier si les deux Personnes sont les mêmes
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns> booléan </returns>
+        public static bool operator ==(Personne p1, Personne p2)
+        {
+            return p1.Nom == p2.Nom && p1.Prenom == p2.Prenom && p1.DateNaiss == p2.DateNaiss;
+           
+        }
+
+        /// <summary>
+        /// Vérifier si les deux Personnes ne sont pas les mêmes
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns> booléan </returns>
+        public static bool operator !=(Personne p1, Personne p2)
+        {
+            return !(p1 == p2);
+        }
+        #endregion
+
         #endregion
     }
 }
