@@ -9,28 +9,29 @@ namespace GestionBanque.Models
 {
     public class Personne
     {
-        #region Field
-        private string _Nom;
-        private string _Prenom;
-        private DateTime _DateNaiss;
+        #region Chapms
+
+        private string _nom;
+        private string _prenom;
+        private DateTime _dateNaiss;
 
         #endregion
 
-        #region Properties
+        #region Propriétés
 
         public string Nom
         {
-            get { return _Nom; }
-            set { _Nom = value; }
+            get { return _nom; }
+            set { _nom = value; }
         }
         public string Prenom
         {
-            get { return _Prenom; }
-            set { _Prenom = value; }
+            get { return _prenom; }
+            set { _prenom = value; }
         }
         public DateTime DateNaiss
         {
-            get { return _DateNaiss; }
+            get { return _dateNaiss; }
             set 
             {
                 // Vérifier si la personne est majeur
@@ -38,22 +39,27 @@ namespace GestionBanque.Models
                 int age = (int)(temp.TotalDays / 365.25);
                 if (age >= 18)
                 {
-                    _DateNaiss = value;
+                    _dateNaiss = value;
                 }
                 else 
                 {
-                    Console.WriteLine("Vous n'êtes pas majeur. Impossible de créer un compte");
+                    throw new Exception("Vous n'êtes pas majeur. Impossible de créer un compte");
                 }
             }
         }
 
+        #endregion
+
+        #region Méthodes
+
         #region Surcharge d'opérateur
+
         /// <summary>
         /// Vérifier si les deux Personnes sont les mêmes
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="p2"></param>
-        /// <returns> booléan </returns>
+        /// <returns></returns>
         public static bool operator ==(Personne p1, Personne p2)
         {
             return p1.Nom == p2.Nom && p1.Prenom == p2.Prenom && p1.DateNaiss == p2.DateNaiss;
@@ -65,7 +71,7 @@ namespace GestionBanque.Models
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="p2"></param>
-        /// <returns> booléan </returns>
+        /// <returns></returns>
         public static bool operator !=(Personne p1, Personne p2)
         {
             return !(p1 == p2);

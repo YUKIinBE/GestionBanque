@@ -12,31 +12,41 @@ namespace GestionBanque.Models
     {
 
 		#region Chapms
-		private string _Nom;
-		private List<Courant> _Courants = new List<Courant>();
+
+		private string _nom;
+		private List<Compte> _comptes = new List<Compte>();
+
 		#endregion
 
 		#region Propriétés
+
 		public string Nom
 		{
-			get { return _Nom; }
-			set { _Nom = value; }
+			get { return _nom; }
+			set { _nom = value; }
 		}
-		private List<Courant> Courants
+		public List<Compte> Comptes
 		{
-			get { return _Courants; }
-			set { _Courants = value; }
+			get { return _comptes; }
+			private set { _comptes = value; }
 		}
+
         #endregion
 
-        #region Indexeur de list Courants
-        public Courant? this[string numeroCompte]
+        #region Indexeur de la liste Comptes
+
+		/// <summary>
+		/// Indexeur de la liste Comptes
+		/// </summary>
+		/// <param name="numeroCompte"></param>
+		/// <returns>Compte lié au numéro de compte</returns>
+		/// <exception cref="KeyNotFoundException"></exception>
+        public Compte? this[string numeroCompte]
 		{
 			get
 			{
-				// Parcourir la liste Courants pour trouver le compte souhaité récupérer
-
-				Courant? compte = Courants.SingleOrDefault(c => c.Numero == numeroCompte);
+				// Parcourir la liste Comptes pour trouver le compte souhaité récupérer
+				Compte? compte = Comptes.SingleOrDefault(c => c.Numero == numeroCompte);
 
 				// Traiter le cas "null"
 
@@ -48,64 +58,67 @@ namespace GestionBanque.Models
 				return compte;
 			}
 		}
+
         #endregion
 
         #region Methods
 
-        #region Gestion de lists Courants
+        #region Gestion de liste Courants
+
 		/// <summary>
-		/// Ajouter un nouveau compte à la liste Courants
+		/// Ajouter un nouveau compte à la liste Comptes
 		/// </summary>
 		/// <param name="compte"></param>
 		/// <exception cref="ArgumentException"></exception>
         public void Ajouter(Courant compte)
 		{
-			// Vérifier si le compte n'existe pas dans la liste Courants
-
-			if (Courants.Any(c => c.Numero == compte.Numero))
+			// Vérifier si le compte n'existe pas dans la liste Comptes
+			if (Comptes.Any(c => c.Numero == compte.Numero))
 			{
 				throw new ArgumentException("Le numéro de compte existe déjà");
             }
 
-			Courants.Add(compte);
+            Console.WriteLine("Le compte a été ajouté à la liste");
+            Comptes.Add(compte);
 		}
 
 		/// <summary>
-		/// Supprimer un compte de la liste Courants
+		/// Supprimer un compte de la liste Comptes
 		/// </summary>
 		/// <param name="numeroCompte"></param>
 		/// <exception cref="KeyNotFoundException"></exception>
 		public void Supprimer(string numeroCompte)
 		{
 			// Parcourir la liste Courants pour trouver le compte souhaité supprimer
-
-			Courant? compte = Courants.FirstOrDefault(c => c.Numero == numeroCompte);
+			Compte? compte = Comptes.FirstOrDefault(c => c.Numero == numeroCompte);
 
             if (compte is null)
 			{
                 throw new KeyNotFoundException("Le numéro n'est pas enregistré");
             }
 
-			Courants.Remove(compte);
+            Console.WriteLine("Le compte a été supprimé de la liste");
+            Comptes.Remove(compte);
         }
+
         #endregion
 
         #region Recherche d'info
 
-		/// <summary>
-		/// Calculer la somme de tous les soldes de comptes possédés par le même titulaire
-		/// </summary>
-		/// <param name="titulaire"></param>
-		/// <returns> double : la somme de tous les soldes </returns>
+        /// <summary>
+        /// Calculer la somme de tous les soldes de comptes possédés par le même titulaire
+        /// </summary>
+        /// <param name="titulaire"></param>
+        /// <returns></returns>
         public double AvoirDesComptes(Personne titulaire)
         {
 			// Créer une liste temp et stocker tous les comptes trouvés avec le même titulaire
-            List<Courant> ComptesDeMemePersonne = new List<Courant>();
-            ComptesDeMemePersonne = Courants.Where(c => c.Titulaire == titulaire).ToList();
+            List<Compte> comptesDeMemePersonne = new List<Compte>();
+            comptesDeMemePersonne = Comptes.Where(c => c.Titulaire == titulaire).ToList();
 
 			// Calculer la somme des soldes
 			double sommeAvoirs = 0;
-			foreach (var compte in ComptesDeMemePersonne)
+			foreach (var compte in comptesDeMemePersonne)
 			{
 				sommeAvoirs += compte;
 			}
@@ -113,6 +126,7 @@ namespace GestionBanque.Models
 			return sommeAvoirs;
 
 		}
+
         #endregion
 
         #endregion

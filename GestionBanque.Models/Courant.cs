@@ -1,45 +1,24 @@
 ﻿namespace GestionBanque.Models
 {
-    public class Courant
+    public class Courant : Compte
     {
-        #region Field
-        private string _Numero;
-        private double _Solde;
-        private double _LigneDeCredit;
-        private Personne _Titulaire;
+        #region Chapms
+
+        private double _ligneDeCredit;
+
         #endregion
 
-        #region Properties
-        public string Numero
-        {
-            get { return _Numero; }
-            set { _Numero = value; }
-        }
-        public double Solde
-        {
-            get { return _Solde; }
-            private set
-            {
-                // Vérification si le solde ne dépasse pas la ligne de crédit
-                if (value > - LigneDeCredit)
-                {
-                    _Solde = value;
-                }
-                else 
-                {
-                    Console.WriteLine("Vous dépassez la ligne de crédit");
-                }
-            }
-        }
+        #region Propriétés
+
         public double LigneDeCredit
         {
-            get { return _LigneDeCredit; }
+            get { return _ligneDeCredit; }
             set
             {
                 // Vérification si la ligne de crédit est positif
                 if (value > 0)
                 {
-                    _LigneDeCredit = value;
+                    _ligneDeCredit = value;
                 }
                 else
                 {
@@ -47,65 +26,22 @@
                 }
             }
         }
-        public Personne Titulaire
-        {
-            get { return _Titulaire; }
-            set { _Titulaire = value; }
-        }
+
         #endregion
 
-        #region Methods
+        #region Méthodes
 
         #region Gestion de l'argent
-        public void Retrait(double Montant)
+
+        public override void Retrait(double montant)
         {
-            // Vérification de montant demandé
-            if(Montant > 0)
+            // Vérification si le solde dépasse la ligne de crédit
+            if (montant > Solde + LigneDeCredit)
             {
-                return;
+                throw new Exception("Vous dépassez la ligne de crédit");
             }
-
-            // Vérification de l'argent disponible
-            if (Solde > Montant)
-            {
-                Solde -= Montant;
-            }
-            else
-            {
-                Console.WriteLine("Vous avez dépassé la limite");
-            }
-
-            // Affichage de solde restant
-            Console.WriteLine($"Votre Solde : {Solde}");
-        }
-        public void Depot(double Montant)
-        {
-            // Vérification de l'argent déposé
-            if (Montant > 0)
-            {
-                Solde += Montant;
-            }
-            else
-            {
-                Console.WriteLine("Le montant doit être positif");
-            }
-            Console.WriteLine($"Votre Solde : {Solde}");
-        }
-        #endregion
-
-        #region Surcharge d'opérateur
-        /// <summary>
-        /// Additionner montant et solde d'un compte
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <param name="compte"></param>
-        /// <returns> La somme </returns>
-        public static double operator +(double amount, Courant compte)
-        {
-            if (compte.Solde < 0) compte.Solde = 0;
-
-            double somme = amount + compte.Solde;
-            return somme;
+            
+            base.Retrait(montant);
         }
 
         #endregion
