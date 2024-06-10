@@ -59,7 +59,7 @@ Console.WriteLine($"p1 and p2 are NOT the same? : {p1 != p2}");
 
 #endregion
 
-Tool.AddTitle("COMPTE");
+Tool.AddTitle("BANQUE");
 
 #region Banque
 
@@ -87,9 +87,14 @@ Tool.AddReturn();
 Console.WriteLine($"Donaldo Duck a deux comptes et les soldes sont 200€ et 150€");
 Console.WriteLine($"La somme de soldes de tous les comptes possédés par Donaldo Duck : {b1.AvoirDesComptes(p2)}");
 
+Tool.AddReturn();
+
+// Aficher info d'un compte
+Banque.AfficherInfo(c1);
+
 #endregion
 
-Tool.AddTitle("BANQUE");
+Tool.AddTitle("COMPTE");
 
 #region Compte
 

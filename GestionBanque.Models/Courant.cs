@@ -10,6 +10,9 @@
 
         #region Propriétés
 
+        public static double TauxCourantPositif => 0.03;
+        public static double TauxCourantNegatif => 0.0975;
+
         public double LigneDeCredit
         {
             get { return _ligneDeCredit; }
@@ -50,7 +53,7 @@
         /// <returns></returns>
         protected override double CalculerInteret()
         {
-            return (Solde > 0) ? Solde * 0.03 : Solde * 0.0975;
+            return (Solde > 0)? Solde * TauxCourantPositif : Solde * TauxCourantNegatif;
         }
         #endregion
 

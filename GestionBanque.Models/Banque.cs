@@ -132,6 +132,25 @@ namespace GestionBanque.Models
 
 		}
 
+		public static void AfficherInfo(Compte compte)
+		{
+			if(compte is Courant)
+			{
+				// Vérifier quel taux à appliquer (positif ou négatif)
+				double temp = (compte.Solde > 0) ? Courant.TauxCourantPositif : Courant.TauxCourantNegatif;
+
+                Console.WriteLine($"C'est un compte Courant.");
+				Console.WriteLine($"Chaque année un taux d'intérêt de {temp:P}");
+				return;
+            }
+            else if (compte is Epargne)
+            {
+                Console.WriteLine($"C'est un compte Courant.");
+                Console.WriteLine($"Chaque année un taux d'intérêt de {Epargne.TauxEpargne:P}");
+                return;
+            }
+        }
+
         #endregion
 
         #endregion

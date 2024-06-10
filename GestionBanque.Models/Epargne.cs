@@ -11,7 +11,8 @@ namespace GestionBanque.Models
         #region Champs
 
         private DateTime _dateDernierRetrait;
-
+        public static double TauxEpargne { get { return 0.045; } }
+        
         #endregion
 
         #region Propriétés
@@ -57,7 +58,7 @@ namespace GestionBanque.Models
         /// <returns></returns>
         protected override double CalculerInteret()
         {            
-            return Solde * 0.045;
+            return Solde * TauxEpargne;
         }
 
         #endregion
