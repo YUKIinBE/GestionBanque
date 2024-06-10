@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -72,8 +71,14 @@ namespace GestionBanque.Models
 		/// <exception cref="ArgumentException"></exception>
         public void Ajouter(Courant compte)
 		{
-			// Vérifier si le compte n'existe pas dans la liste Comptes
-			if (Comptes.Any(c => c.Numero == compte.Numero))
+			// Vérifier si le numéro de compte est null
+			if (compte.Numero is null)
+			{
+				throw new ArgumentException("Le numéro de compte ne peut pas être null");
+			}
+
+            // Vérifier si le compte existe dans la liste Comptes
+            if (Comptes.Any(c => c.Numero == compte.Numero))
 			{
 				throw new ArgumentException("Le numéro de compte existe déjà");
             }

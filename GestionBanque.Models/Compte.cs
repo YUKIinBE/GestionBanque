@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionBanque.Models
 {
-    public class Compte
+    public abstract class Compte
     {
         #region Champs
 
@@ -65,21 +65,13 @@ namespace GestionBanque.Models
         public virtual void Retrait(double montant)
         {
             // Vérification de montant demandé
-            if (montant >= 0)
+            if (montant <= 0)
             {
                 Console.WriteLine("Montant doit être positif");
                 return;
             }
 
-            // Vérification de l'argent disponible
-            if (Solde > montant)
-            {
-                Solde -= montant;
-            }
-            else
-            {
-                throw new Exception("Vous avez dépassé la limite");
-            }
+            Solde -= montant;
 
             // Affichage de solde restant
             Console.WriteLine($"Votre Solde : {Solde}");
@@ -112,7 +104,18 @@ namespace GestionBanque.Models
             }
             Console.WriteLine($"Votre Solde : {Solde}");
         }
+        /// <summary>
+        /// Calculer l'intérêt de taux différents en fonction de type de comptes
+        /// </summary>
+        /// <returns></returns>
+        protected abstract double CalculerInteret();
 
+        public void AppliquerInteret()
+        {
+            double interetCalcule = CalculerInteret();
+            Console.WriteLine($"Interet calculé : {interetCalcule}");
+            Solde += interetCalcule;
+        }
         #endregion
 
         #endregion

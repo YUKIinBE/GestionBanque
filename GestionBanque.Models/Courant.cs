@@ -44,6 +44,14 @@
             base.Retrait(montant);
         }
 
+        /// <summary>
+        /// Calculer l'intérêt de taux 3% pour le Solde en positif et 9.75% en négatif
+        /// </summary>
+        /// <returns></returns>
+        protected override double CalculerInteret()
+        {
+            return (Solde > 0) ? Solde * 0.03 : Solde * 0.0975;
+        }
         #endregion
 
         #endregion

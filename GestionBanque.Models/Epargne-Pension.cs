@@ -54,6 +54,11 @@ namespace GestionBanque.Models
             DateDeDernierDepot = DateTime.Now;
         }
 
+        protected override double CalculerInteret()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #endregion

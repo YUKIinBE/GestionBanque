@@ -32,7 +32,7 @@ c2.LigneDeCredit = 100;
 
 // Donald Duck 2e compte
 Courant c3 = new Courant();
-c2.Numero = "789";
+c3.Numero = "789";
 c3.Titulaire = p2;
 c3.Depot(150);
 c3.LigneDeCredit = 75;
@@ -59,25 +59,12 @@ Console.WriteLine($"p1 and p2 are NOT the same? : {p1 != p2}");
 
 #endregion
 
-Tool.AddLine();
+Tool.AddTitle("COMPTE");
 
 #region Banque
 
 // Indexeur de la liste Comptes
 Console.WriteLine("Parcourir la liste Comptes pour trouver le compte souhaité récupérer");
-
-Compte temp = new Compte();
-
-foreach(var compte in b1.Comptes)
-{
-    if (compte.Numero == "123")
-    {
-        temp = compte;
-    }
-}
-Console.WriteLine($"Solde de compte « 123 » : {temp.Solde}");
-
-
 Console.WriteLine($"Solde de compte « 123 » : {b1["123"].Solde}");
 
 Tool.AddReturn();
@@ -102,7 +89,7 @@ Console.WriteLine($"La somme de soldes de tous les comptes possédés par Donald
 
 #endregion
 
-Tool.AddLine();
+Tool.AddTitle("BANQUE");
 
 #region Compte
 
@@ -120,10 +107,27 @@ Console.WriteLine($"Solde de Mickey : {c1.Solde}");
 
 Tool.AddReturn();
 
+// Retirer de l'argent du solde
+Console.WriteLine($"Solde de Donaldo compte 1 : {c2.Solde}");
+Console.WriteLine($"Retrait de 250€");
+c2.Retrait(250);
+Console.WriteLine($"Solde de Donaldo compte 1 : {c2.Solde}");
+
+Tool.AddReturn();
+
+// Cakculer l'interet et l'appliquer
+// Compte courant Solde positif
 Console.WriteLine($"Solde de Mickey : {c1.Solde}");
-c1.Retrait(100);
-Console.WriteLine($"Depot de 100€");
+c1.AppliquerInteret();
 Console.WriteLine($"Solde de Mickey : {c1.Solde}");
+
+Tool.AddReturn();
+
+// Compte courant Solde négatif
+Console.WriteLine($"Solde de Donaldo compte 1 : {c2.Solde}");
+c2.AppliquerInteret();
+Console.WriteLine($"Solde de Donaldo compte 1 : {c2.Solde}");
+
 
 #endregion
 

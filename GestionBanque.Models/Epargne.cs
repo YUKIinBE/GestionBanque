@@ -51,6 +51,15 @@ namespace GestionBanque.Models
             }
         }
 
+        /// <summary>
+        /// Calculer l'intérêt de taux 4.5%
+        /// </summary>
+        /// <returns></returns>
+        protected override double CalculerInteret()
+        {            
+            return Solde * 0.045;
+        }
+
         #endregion
 
         #endregion
