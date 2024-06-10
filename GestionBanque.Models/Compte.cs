@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionBanque.Models
 {
-    public abstract class Compte
+    public abstract class Compte : IBanker
     {
         #region Champs
 
@@ -116,6 +116,11 @@ namespace GestionBanque.Models
             Console.WriteLine($"Interet calculé : {interetCalcule}");
             Solde += interetCalcule;
         }
+
+        #endregion
+
+        #region Recherche d'info
+
         #endregion
 
         #endregion

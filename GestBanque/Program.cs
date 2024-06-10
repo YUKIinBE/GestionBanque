@@ -136,6 +136,24 @@ Console.WriteLine($"Solde de Donaldo compte 1 : {c2.Solde}");
 
 #endregion
 
-Tool.AddLine();
+#region ICustomer
+
+Tool.AddTitle("ICustomer");
+
+// customer1 a un accès seulement au Solde, Depot, Retrait 
+ICustomer customer1 = c2;
+Console.WriteLine($"Votre Solde : {customer1.Solde}");
+
+#endregion
+
+#region IBanker
+
+Tool.AddTitle("IBanker");
+
+// banker1 a un accès au Titulaire, Numero, AppliquerInteret en plus de Solde, Depot, Retrait
+IBanker banker1 = c1;
+banker1.AppliquerInteret();
+
+#endregion
 
 #endregion
