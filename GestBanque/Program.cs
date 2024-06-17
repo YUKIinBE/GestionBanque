@@ -3,39 +3,24 @@ using Tools.Models;
 
 #region Création de personnes
 
-Personne p1 = new Personne()
-{
-    Nom = "Mouse", Prenom = "Mickey", DateNaiss = new DateTime(1928, 11, 18)
-};
-Personne p2 = new Personne() 
-{ 
-    Nom = "Duck", Prenom = "Donald", DateNaiss = new DateTime(1934, 6, 9) 
-};
+Personne p1 = new Personne("Mouse", "Mickey", new DateTime(1928, 11, 18));
+Personne p2 = new Personne("Duck", "Donaldo", new DateTime(1934, 6, 9));
 
 #endregion
 
 #region Création de comptes
 
 // Mickey Mouse
-Courant c1 = new Courant();
-c1.Numero = "123";
-c1.Titulaire = p1;
+Courant c1 = new Courant("123", p1, 50);
 c1.Depot(100);
-c1.LigneDeCredit = 50;
 
 // Donald Duck
-Courant c2 = new Courant();
-c2.Numero = "456";
-c2.Titulaire = p2;
+Courant c2 = new Courant("456", p2, 100);
 c2.Depot(200);
-c2.LigneDeCredit = 100;
 
 // Donald Duck 2e compte
-Courant c3 = new Courant();
-c3.Numero = "789";
-c3.Titulaire = p2;
+Courant c3 = new Courant("789", p2, 75);
 c3.Depot(150);
-c3.LigneDeCredit = 75;
 
 #endregion
 
@@ -153,6 +138,20 @@ Tool.AddTitle("IBanker");
 // banker1 a un accès au Titulaire, Numero, AppliquerInteret en plus de Solde, Depot, Retrait
 IBanker banker1 = c1;
 banker1.AppliquerInteret();
+
+#endregion
+
+#region IPaiement
+
+Tool.AddTitle("IPaiement");
+
+CarteDeCredit carte1 = new CarteDeCredit()
+{
+    Titulaire = p1,
+    DateExpiration = DateTime.Now,
+};
+
+carte1.EffectuerPaiement(c1, c2, 50);
 
 #endregion
 

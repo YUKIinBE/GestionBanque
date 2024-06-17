@@ -17,22 +17,33 @@ namespace GestionBanque.Models
 
         #endregion
 
+        #region Constructeur
+
+        public Personne(string nom, string prenom, DateTime dateNaiss)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            DateNaiss = dateNaiss;
+        }
+
+        #endregion
+
         #region Propriétés
 
         public string Nom
         {
             get { return _nom; }
-            set { _nom = value; }
+            private set { _nom = value; }
         }
         public string Prenom
         {
             get { return _prenom; }
-            set { _prenom = value; }
+            private set { _prenom = value; }
         }
         public DateTime DateNaiss
         {
             get { return _dateNaiss; }
-            set 
+            private set 
             {
                 // Vérifier si la personne est majeur
                 TimeSpan temp = DateTime.Now - DateNaiss;

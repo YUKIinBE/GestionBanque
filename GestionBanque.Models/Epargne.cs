@@ -11,6 +11,11 @@ namespace GestionBanque.Models
         #region Champs
 
         private DateTime _dateDernierRetrait;
+
+        public Epargne(string numero, Personne titulaire) : base(numero, titulaire)
+        {
+        }
+
         public static double TauxEpargne { get { return 0.045; } }
         
         #endregion

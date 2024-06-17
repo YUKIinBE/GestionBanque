@@ -6,7 +6,18 @@
 
         private double _ligneDeCredit;
 
+        public Courant(string numero, Personne titulaire) : base(numero, titulaire)
+        {
+        }
+
+        public Courant(string numero, Personne titulaire, double ligneDeCredit) : base(numero, titulaire)
+        {
+            LigneDeCredit = ligneDeCredit;
+        }
+
         #endregion
+
+
 
         #region Propriétés
 

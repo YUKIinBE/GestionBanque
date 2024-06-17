@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +17,29 @@ namespace GestionBanque.Models
 
         #endregion
 
+        #region Constructeur
+
+        public Compte(string numero, Personne titulaire)
+        {
+            Numero = numero;
+            Titulaire = titulaire;
+        }
+
+        public Compte(string numero, Personne titulaire, double solde)
+        {
+            Numero = numero;
+            Titulaire = titulaire;
+            Solde = solde;
+        }
+
+        #endregion
+
         #region Propriétés
 
         public string Numero
         {
             get { return _numero; }
-            set { _numero = value; }
+            private set { _numero = value; }
         }
         public double Solde
         {
@@ -31,7 +49,7 @@ namespace GestionBanque.Models
         public Personne Titulaire
         {
             get { return _titulaire; }
-            set { _titulaire = value; }
+            private set { _titulaire = value; }
         }
 
         #endregion
