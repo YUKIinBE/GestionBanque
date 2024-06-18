@@ -40,12 +40,6 @@ namespace GestionBanque.Models
         /// <param name="montant"></param>
         public override void Retrait(double montant)
         {
-            // Vérification si le solde dépasse la ligne de crédit
-            if (montant > Solde)
-            {
-                throw new Exception("Vous avez dépassé le Solde");
-            }
-
             double oldSolde = Solde;
             
             base.Retrait(montant);

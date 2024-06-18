@@ -15,6 +15,15 @@ namespace GestionBanque.Models
         private double _solde;
         private Personne _titulaire;
 
+
+        #region Événement & Action et Func
+        //public event PassageEnNegatifDelegate PassageEnNegatifEvent;
+        public event Action<Compte> PassageEnNegatifEvent;
+
+        //Action raisePassageEnNegatif = () => { PassageEnNegatifEvent(); };
+
+        #endregion
+
         #endregion
 
         #region Constructeur
@@ -54,6 +63,7 @@ namespace GestionBanque.Models
 
         #endregion
 
+
         #region Méthodes
 
         #region Surcharge d'opérateur
@@ -85,7 +95,7 @@ namespace GestionBanque.Models
             // Vérification de montant demandé
             if (montant <= 0)
             {
-                Console.WriteLine("Montant doit être positif");
+                throw new SoldeInsuffisantException();
                 return;
             }
 
@@ -112,14 +122,12 @@ namespace GestionBanque.Models
         public virtual void Depot(double montant)
         {
             // Vérification de l'argent déposé
-            if (montant > 0)
+            if (montant < 0)
             {
-                Solde += montant;
+                throw new ArgumentOutOfRangeException("Le montant doit être positif");
             }
-            else
-            {
-                throw new Exception("Le montant doit être positif");
-            }
+
+            Solde += montant;
             Console.WriteLine($"Votre Solde : {Solde}");
         }
         /// <summary>
@@ -133,6 +141,14 @@ namespace GestionBanque.Models
             double interetCalcule = CalculerInteret();
             Console.WriteLine($"Interet calculé : {interetCalcule}");
             Solde += interetCalcule;
+        }
+
+        protected void RaisePassageEnNegatif()
+        {
+            if (PassageEnNegatifEvent != null)
+            {
+                PassageEnNegatifEvent?.Invoke(this);
+            }
         }
 
         #endregion

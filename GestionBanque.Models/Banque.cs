@@ -85,6 +85,8 @@ namespace GestionBanque.Models
 
             Console.WriteLine("Le compte a été ajouté à la liste");
             Comptes.Add(compte);
+
+			compte.PassageEnNegatifEvent += PassageEnNegatifAction;
 		}
 
 		/// <summary>
@@ -104,6 +106,11 @@ namespace GestionBanque.Models
 
             Console.WriteLine("Le compte a été supprimé de la liste");
             Comptes.Remove(compte);
+        }
+
+		public void PassageEnNegatifAction(Compte compte)
+		{
+            Console.WriteLine($"Le compte {compte.Numero} vient de passer en négatif");
         }
 
         #endregion

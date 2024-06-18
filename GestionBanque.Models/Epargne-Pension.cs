@@ -13,6 +13,8 @@ namespace GestionBanque.Models
         private DateTime _dateDeDernierDepot;
 		private double _montantMensuelMax;
 
+        public Epargne_Pension(string numero, Personne titulaire) : base(numero, titulaire) { }
+
         #endregion
 
         #region Propriétés

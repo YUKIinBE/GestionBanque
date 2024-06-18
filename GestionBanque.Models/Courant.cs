@@ -12,6 +12,11 @@
 
         public Courant(string numero, Personne titulaire, double ligneDeCredit) : base(numero, titulaire)
         {
+            if (ligneDeCredit <= 0)
+            {
+                throw new InvalidOperationException("Le montant doit être positif");
+            }
+
             LigneDeCredit = ligneDeCredit;
         }
 
@@ -56,6 +61,11 @@
             }
             
             base.Retrait(montant);
+
+            if(Solde < 0)
+            {
+                RaisePassageEnNegatif();
+            }
         }
 
         /// <summary>
